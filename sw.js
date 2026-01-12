@@ -1,0 +1,45 @@
+// MSB Schema Service Worker
+const CACHE_NAME = 'msb-schema-v2';
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './style.css',
+  './script.js',
+  './favicon.svg',
+  './icons/icon-144.png',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/apple-touch-icon.png',
+  './manifest.json'
+];
+
+// Install - cache assets
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(ASSETS_TO_CACHE))
+      .then(() => self.skipWaiting())
+  );
+});
+
+// Activate - clean old caches
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then(names =>
+      Promise.all(names.map(name => {
+        if (name.startsWith('msb-schema-') && name !== CACHE_NAME) {
+          return caches.delete(name);
+        }
+      }))
+    ).then(() => self.clients.claim())
+  );
+});
+
+// Fetch - cache first, network fallback
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
+      .catch(() => caches.match('./index.html'))
+  );
+});
