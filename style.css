@@ -1,0 +1,562 @@
+/* ============================================
+   MSB Schema - Glassmorphism Design
+   ============================================ */
+
+:root {
+    /* Colors */
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #12121a;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+
+    /* Accent colors for lesson types */
+    --color-admin: #f59e0b;
+    --color-intro: #8b5cf6;
+    --color-theory: #3b82f6;
+    --color-usar: #ef4444;
+    --color-cbrn: #10b981;
+    --color-fire: #f97316;
+    --color-amh: #ec4899;
+    --color-medical: #14b8a6;
+    --color-exercise: #f43f5e;
+    --color-self-study: #6366f1;
+
+    /* Group colors */
+    --group-a: #22d3ee;
+    --group-b: #a78bfa;
+    --group-all: rgba(255, 255, 255, 0.6);
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+
+    /* Border radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 400ms ease;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 180px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Static Background - optimized for performance */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 60%),
+        var(--bg-primary);
+    will-change: transform;
+}
+
+/* Header */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: rgba(10, 10, 15, 0.95);
+    border-bottom: 1px solid var(--glass-border);
+    transform: translateZ(0);
+}
+
+.header-content {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: var(--spacing-xs);
+}
+
+/* Group Filter */
+.group-filter {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.filter-btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    background: var(--glass-bg);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.filter-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--text-primary);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Day Navigation */
+.day-nav {
+    position: sticky;
+    top: 120px;
+    z-index: 90;
+    background: rgba(10, 10, 15, 0.98);
+    border-bottom: 1px solid var(--glass-border);
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.day-nav-scroll {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md) var(--spacing-xl);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.day-nav-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.day-link {
+    flex-shrink: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-normal);
+    border: 1px solid transparent;
+}
+
+.day-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.day-link.active {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+    border-color: rgba(139, 92, 246, 0.5);
+    color: var(--text-primary);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+/* Main Schedule */
+.schedule {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+}
+
+/* Day Section */
+.day-section {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.day-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.day-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.day-date {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* Lessons Grid */
+.lessons {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+/* Lesson Card - Glassmorphism */
+.lesson-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-lg);
+    transition: background var(--transition-normal), border-color var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.lesson-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--card-accent, var(--color-theory));
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.lesson-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Card accent colors by type */
+.lesson-card[data-type="admin"] { --card-accent: var(--color-admin); }
+.lesson-card[data-type="intro"] { --card-accent: var(--color-intro); }
+.lesson-card[data-type="theory"] { --card-accent: var(--color-theory); }
+.lesson-card[data-type="usar"] { --card-accent: var(--color-usar); }
+.lesson-card[data-type="cbrn"] { --card-accent: var(--color-cbrn); }
+.lesson-card[data-type="fire"] { --card-accent: var(--color-fire); }
+.lesson-card[data-type="amh"] { --card-accent: var(--color-amh); }
+.lesson-card[data-type="medical"] { --card-accent: var(--color-medical); }
+.lesson-card[data-type="exercise"] { --card-accent: var(--color-exercise); }
+.lesson-card[data-type="self-study"] { --card-accent: var(--color-self-study); }
+
+/* Time display */
+.lesson-time {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    align-self: start;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Lesson content */
+.lesson-content {
+    min-width: 0;
+}
+
+.lesson-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.lesson-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.lesson-location {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.lesson-location::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.5)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'/%3E%3C/svg%3E");
+    background-size: contain;
+}
+
+.lesson-group {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.group-all {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--group-all);
+}
+
+.group-a {
+    background: rgba(34, 211, 238, 0.15);
+    color: var(--group-a);
+    border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+.group-b {
+    background: rgba(167, 139, 250, 0.15);
+    color: var(--group-b);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+.lesson-instructors {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Lesson details - clothing, equipment, notes */
+.lesson-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.lesson-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.detail-label {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 70px;
+}
+
+.detail-value {
+    color: var(--text-secondary);
+}
+
+.detail-value.clothing {
+    color: #fbbf24;
+}
+
+.detail-value.equipment {
+    color: #60a5fa;
+}
+
+.detail-value.note {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+/* Hidden state for filtered cards */
+.lesson-card.hidden {
+    display: none;
+}
+
+/* Today highlight */
+.day-link.today {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3));
+    border-color: rgba(34, 197, 94, 0.5);
+    color: #4ade80;
+}
+
+.day-link.today::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+}
+
+.day-link {
+    position: relative;
+}
+
+.day-section.today .day-header {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-md));
+    margin-bottom: var(--spacing-md);
+}
+
+.day-section.today .day-name::before {
+    content: 'IDAG - ';
+    color: #4ade80;
+    font-weight: 700;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.footer-note {
+    margin-top: var(--spacing-xs);
+    font-size: 0.8rem;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 160px;
+    }
+
+    .header {
+        padding: var(--spacing-md);
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .filter-btn {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: 0.8rem;
+    }
+
+    .day-nav {
+        top: 105px;
+    }
+
+    .day-nav-scroll {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .day-link {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8rem;
+    }
+
+    .schedule {
+        padding: var(--spacing-md);
+    }
+
+    .day-header {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .day-name {
+        font-size: 1.25rem;
+    }
+
+    .lesson-card {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .lesson-time {
+        justify-self: start;
+    }
+
+    .lesson-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .group-filter {
+        gap: var(--spacing-xs);
+    }
+
+    .filter-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+    .background-animation,
+    .header,
+    .day-nav,
+    .footer {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .lesson-card {
+        background: white;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+    }
+
+    .lesson-card::before {
+        background: #333;
+    }
+}
