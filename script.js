@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGroupFilter();
     initDayNavigation();
     initScrollTracking();
+    initTodayHighlight();
 });
 
 /**
@@ -97,5 +98,37 @@ function initScrollTracking() {
     // Set initial state
     if (dayLinks.length > 0) {
         dayLinks[0].classList.add('active');
+    }
+}
+
+/**
+ * Today Highlight
+ * Marks today's date in navigation and section
+ */
+function initTodayHighlight() {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth(); // 0-indexed, January = 0
+    const year = today.getFullYear();
+
+    // Schedule runs January 12-21, 2026
+    if (year !== 2026 || month !== 0 || day < 12 || day > 21) {
+        return; // Outside schedule range
+    }
+
+    // Highlight nav link
+    const navLink = document.querySelector(`.day-link[href="#day-${day}"]`);
+    if (navLink) {
+        navLink.classList.add('today');
+    }
+
+    // Highlight day section
+    const daySection = document.getElementById(`day-${day}`);
+    if (daySection) {
+        daySection.classList.add('today');
+        // Scroll to today on load
+        setTimeout(() => {
+            daySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
     }
 }
