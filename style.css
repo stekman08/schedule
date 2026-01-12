@@ -14,17 +14,10 @@
     --text-secondary: rgba(255, 255, 255, 0.7);
     --text-muted: rgba(255, 255, 255, 0.5);
 
-    /* Accent colors for lesson types */
-    --color-admin: #f59e0b;
-    --color-intro: #8b5cf6;
-    --color-theory: #3b82f6;
-    --color-usar: #ef4444;
-    --color-cbrn: #10b981;
-    --color-fire: #f97316;
-    --color-amh: #ec4899;
-    --color-medical: #14b8a6;
-    --color-exercise: #f43f5e;
-    --color-self-study: #6366f1;
+    /* Accent colors for clothing requirements */
+    --color-casual: #10b981;      /* Green - Valfri/Civila kläder */
+    --color-protective: #f97316;  /* Orange - Skyddsklädsel */
+    --color-workout: #3b82f6;     /* Blue - Träningskläder */
 
     /* Group colors */
     --group-a: #22d3ee;
@@ -262,7 +255,7 @@ body {
     left: 0;
     width: 4px;
     height: 100%;
-    background: var(--card-accent, var(--color-theory));
+    background: var(--card-accent, var(--color-casual));
     border-radius: var(--radius-lg) 0 0 var(--radius-lg);
 }
 
@@ -271,17 +264,10 @@ body {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Card accent colors by type */
-.lesson-card[data-type="admin"] { --card-accent: var(--color-admin); }
-.lesson-card[data-type="intro"] { --card-accent: var(--color-intro); }
-.lesson-card[data-type="theory"] { --card-accent: var(--color-theory); }
-.lesson-card[data-type="usar"] { --card-accent: var(--color-usar); }
-.lesson-card[data-type="cbrn"] { --card-accent: var(--color-cbrn); }
-.lesson-card[data-type="fire"] { --card-accent: var(--color-fire); }
-.lesson-card[data-type="amh"] { --card-accent: var(--color-amh); }
-.lesson-card[data-type="medical"] { --card-accent: var(--color-medical); }
-.lesson-card[data-type="exercise"] { --card-accent: var(--color-exercise); }
-.lesson-card[data-type="self-study"] { --card-accent: var(--color-self-study); }
+/* Card accent colors by clothing requirement */
+.lesson-card[data-clothing="casual"] { --card-accent: var(--color-casual); }
+.lesson-card[data-clothing="protective"] { --card-accent: var(--color-protective); }
+.lesson-card[data-clothing="workout"] { --card-accent: var(--color-workout); }
 
 /* Time display */
 .lesson-time {
