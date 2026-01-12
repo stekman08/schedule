@@ -1,30 +1,23 @@
-# CIV RU SA 2603 - Schema
+# CIV RU SA 2603 - Schedule
 
-Statisk schemavy för räddningsutbildningen CIV RU SA 2603 vid MSB Sandö.
+Static schedule view for the rescue training course CIV RU SA 2603 at MSB Sandö.
 
-**Period:** 12-21 januari 2026
+**Period:** January 12-21, 2026
 
-## Funktioner
+## Features
 
-- Glassmorphism-design med mörkt tema
-- Mobilanpassad layout
-- Navigering mellan dagar via sticky nav-bar
-- Filtrera på Grupp A / Grupp B / Alla
-- Färgkodade lektionstyper
+- Glassmorphism design with dark theme
+- Mobile-responsive layout
+- Day navigation via sticky nav-bar
+- Filter by Group A / Group B / All
+- Color-coded clothing requirements (green = casual, orange = protective gear, blue = workout clothes)
+- PWA support for offline use
 
-## Lokal användning
+## Local Usage
 
-Öppna `index.html` direkt i webbläsaren.
+Open `index.html` directly in the browser.
 
-## GitHub Pages
-
-1. Pusha till GitHub
-2. Gå till repo Settings > Pages
-3. Välj "Deploy from a branch"
-4. Välj `main` branch och `/ (root)`
-5. Sidan publiceras på `https://<username>.github.io/schedule/`
-
-## Teknologi
+## Technology
 
 - HTML5
 - CSS3 (Glassmorphism, CSS Grid, Flexbox)
