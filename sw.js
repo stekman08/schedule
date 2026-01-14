@@ -1,5 +1,5 @@
 // MSB Schema Service Worker
-const CACHE_NAME = 'msb-schema-v2';
+const CACHE_NAME = 'msb-schema-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
