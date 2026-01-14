@@ -15,9 +15,12 @@
     --text-muted: rgba(255, 255, 255, 0.5);
 
     /* Accent colors for clothing requirements */
-    --color-casual: #10b981;      /* Green - Valfri/Civila kläder */
-    --color-protective: #f97316;  /* Orange - Skyddsklädsel */
-    --color-workout: #3b82f6;     /* Blue - Träningskläder */
+    --color-casual: #10b981;
+    /* Green - Valfri/Civila kläder */
+    --color-protective: #f97316;
+    /* Orange - Skyddsklädsel */
+    --color-workout: #3b82f6;
+    /* Blue - Träningskläder */
 
     /* Group colors */
     --group-a: #22d3ee;
@@ -45,7 +48,9 @@
 }
 
 /* Reset & Base */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -101,7 +106,7 @@ body {
     font-size: clamp(1.5rem, 4vw, 2.25rem);
     font-weight: 700;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -217,7 +222,7 @@ body {
 .day-name {
     font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -265,9 +270,17 @@ body {
 }
 
 /* Card accent colors by clothing requirement */
-.lesson-card[data-clothing="casual"] { --card-accent: var(--color-casual); }
-.lesson-card[data-clothing="protective"] { --card-accent: var(--color-protective); }
-.lesson-card[data-clothing="workout"] { --card-accent: var(--color-workout); }
+.lesson-card[data-clothing="casual"] {
+    --card-accent: var(--color-casual);
+}
+
+.lesson-card[data-clothing="protective"] {
+    --card-accent: var(--color-protective);
+}
+
+.lesson-card[data-clothing="workout"] {
+    --card-accent: var(--color-workout);
+}
 
 /* Time display */
 .lesson-time {
@@ -385,9 +398,37 @@ body {
     color: #60a5fa;
 }
 
+.detail-value.vehicle {
+    color: #0891b2;
+}
+
+.vehicle-reg {
+    display: inline-block;
+    background: #0891b2;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 0.2em 0.55em;
+    margin-left: 0.3em;
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-size: 0.92em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
 .detail-value.note {
     color: rgba(255, 255, 255, 0.6);
     font-style: italic;
+}
+
+.detail-value.note a {
+    color: #60a5fa;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.detail-value.note a:hover {
+    color: #93c5fd;
 }
 
 /* Hidden state for filtered cards */
@@ -524,6 +565,7 @@ body {
    ============================================ */
 
 @media print {
+
     .background-animation,
     .header,
     .day-nav,
