@@ -102,8 +102,28 @@ function initDayNavigation() {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                
+                // Center the clicked link in the nav
+                centerDayLinkInNav(link);
             }
         });
+    });
+}
+
+/**
+ * Center a day link in the navigation scroll
+ */
+function centerDayLinkInNav(link) {
+    const navScroll = document.querySelector('.day-nav-scroll');
+    if (!navScroll || !link) return;
+    
+    const navScrollRect = navScroll.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const scrollCenter = navScroll.scrollLeft + (linkRect.left - navScrollRect.left) - (navScrollRect.width / 2) + (linkRect.width / 2);
+    
+    navScroll.scrollTo({
+        left: Math.max(0, scrollCenter),
+        behavior: 'smooth'
     });
 }
 
@@ -114,6 +134,7 @@ function initScrollTracking() {
     const daySections = document.querySelectorAll('.day-section');
     const dayLinks = document.querySelectorAll('.day-link');
     let ticking = false;
+    let lastActiveLink = null;
 
     function updateActiveLink() {
         const scrollPos = window.scrollY + 250;
@@ -129,7 +150,14 @@ function initScrollTracking() {
             const sectionId = currentSection.id;
             dayLinks.forEach(link => {
                 const linkTarget = link.getAttribute('href').slice(1);
-                link.classList.toggle('active', linkTarget === sectionId);
+                const isActive = linkTarget === sectionId;
+                link.classList.toggle('active', isActive);
+                
+                // Center the newly active link in nav if it changed
+                if (isActive && link !== lastActiveLink) {
+                    lastActiveLink = link;
+                    centerDayLinkInNav(link);
+                }
             });
         }
     }
@@ -171,16 +199,7 @@ function initTodayHighlight() {
         navLink.classList.add('today');
         
         // Center today's date in the day navigation scroll
-        const navScroll = document.querySelector('.day-nav-scroll');
-        if (navScroll) {
-            // Calculate scroll position to center the today link
-            const navScrollRect = navScroll.getBoundingClientRect();
-            const linkRect = navLink.getBoundingClientRect();
-            const scrollCenter = navScroll.scrollLeft + (linkRect.left - navScrollRect.left) - (navScrollRect.width / 2) + (linkRect.width / 2);
-            
-            // Ensure we don't scroll past the beginning
-            navScroll.scrollLeft = Math.max(0, scrollCenter);
-        }
+        centerDayLinkInNav(navLink);
     }
 
     // Highlight day section
