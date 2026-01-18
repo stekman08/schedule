@@ -17,21 +17,70 @@ function initGroupFilter() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const lessonCards = document.querySelectorAll('.lesson-card');
 
+    // Apply filter to all cards
+    function applyFilter(filter) {
+        lessonCards.forEach(card => {
+            const cardGroup = card.dataset.group;
+            if (filter === 'all' || cardGroup === 'all' || cardGroup === filter) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    }
+
+    // Find the day header closest to top of viewport
+    function getVisibleDayHeader() {
+        const dayHeaders = document.querySelectorAll('.day-section .day-header');
+        let bestElement = null;
+        let bestDistance = Infinity;
+        
+        dayHeaders.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top >= -100 && rect.top < 300) {
+                const distance = Math.abs(rect.top);
+                if (distance < bestDistance) {
+                    bestDistance = distance;
+                    bestElement = el;
+                }
+            }
+        });
+        
+        return bestElement;
+    }
+
+    // Load saved filter on page load
+    const savedFilter = localStorage.getItem('selectedGroup');
+    if (savedFilter) {
+        const savedButton = document.querySelector(`.filter-btn[data-filter="${savedFilter}"]`);
+        if (savedButton) {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            savedButton.classList.add('active');
+            applyFilter(savedFilter);
+        }
+    }
+
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filter = button.dataset.filter;
 
+            // Remember visible day header and its position before filter change
+            const visibleHeader = getVisibleDayHeader();
+            const offsetBefore = visibleHeader ? visibleHeader.getBoundingClientRect().top : 0;
+
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            lessonCards.forEach(card => {
-                const cardGroup = card.dataset.group;
-                if (filter === 'all' || cardGroup === 'all' || cardGroup === filter) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
+            applyFilter(filter);
+
+            // Save filter choice to localStorage
+            localStorage.setItem('selectedGroup', filter);
+
+            // Restore scroll position to keep same day header at same visual position
+            if (visibleHeader) {
+                const offsetAfter = visibleHeader.getBoundingClientRect().top;
+                window.scrollBy(0, offsetAfter - offsetBefore);
+            }
         });
     });
 }
