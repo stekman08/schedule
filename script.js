@@ -169,6 +169,18 @@ function initTodayHighlight() {
     const navLink = document.querySelector(`.day-link[href="#day-${day}"]`);
     if (navLink) {
         navLink.classList.add('today');
+        
+        // Center today's date in the day navigation scroll
+        const navScroll = document.querySelector('.day-nav-scroll');
+        if (navScroll) {
+            // Calculate scroll position to center the today link
+            const navScrollRect = navScroll.getBoundingClientRect();
+            const linkRect = navLink.getBoundingClientRect();
+            const scrollCenter = navScroll.scrollLeft + (linkRect.left - navScrollRect.left) - (navScrollRect.width / 2) + (linkRect.width / 2);
+            
+            // Ensure we don't scroll past the beginning
+            navScroll.scrollLeft = Math.max(0, scrollCenter);
+        }
     }
 
     // Highlight day section

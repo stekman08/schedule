@@ -91,7 +91,6 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    padding: var(--spacing-lg) var(--spacing-xl);
     background: rgba(10, 10, 15, 0.95);
     border-bottom: 1px solid var(--glass-border);
     transform: translateZ(0);
@@ -99,11 +98,11 @@ body {
 
 .header-content {
     text-align: center;
-    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-xs);
 }
 
 .header h1 {
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem);
     font-weight: 700;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
@@ -114,8 +113,8 @@ body {
 
 .subtitle {
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-top: var(--spacing-xs);
+    font-size: 0.8rem;
+    margin-top: 2px;
 }
 
 /* Group Filter */
@@ -123,15 +122,16 @@ body {
     display: flex;
     justify-content: center;
     gap: var(--spacing-sm);
+    padding: 0 var(--spacing-xl) var(--spacing-sm);
 }
 
 .filter-btn {
-    padding: var(--spacing-sm) var(--spacing-lg);
+    padding: var(--spacing-xs) var(--spacing-md);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
     background: var(--glass-bg);
     color: var(--text-secondary);
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     transition: all var(--transition-normal);
@@ -151,19 +151,15 @@ body {
 
 /* Day Navigation */
 .day-nav {
-    position: sticky;
-    top: 120px;
-    z-index: 90;
     background: rgba(10, 10, 15, 0.98);
-    border-bottom: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-border);
     overflow: hidden;
-    transform: translateZ(0);
 }
 
 .day-nav-scroll {
     display: flex;
     gap: var(--spacing-xs);
-    padding: var(--spacing-md) var(--spacing-xl);
+    padding: var(--spacing-sm) var(--spacing-xl);
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -200,6 +196,8 @@ body {
 
 /* Main Schedule */
 .schedule {
+    position: relative;
+    z-index: 1;
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--spacing-xl);
